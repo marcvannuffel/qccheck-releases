@@ -7,7 +7,7 @@
 <title>Install QCCheck</title>
 <meta name="description" content="Install QCCheck – file-based QC before delivery to ARD, ZDF, ORF and SRF. One line on Windows or Mac, signed packages, automatic updates.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect x='2' y='2' width='12' height='12' rx='3' fill='%232f74d0'/%3E%3Cpath d='M5 8.2l2 2 4-4.4' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="stylesheet" href="site.css?v=1">
+<link rel="stylesheet" href="site.css?v=2">
 </head>
 <body>
 
@@ -43,28 +43,53 @@
     <img class="shot" src="img/player.jpg" width="1600" height="979" alt="QCCheck player with frame-accurate timeline, findings as markers, loudness and waveform">
   </section>
 
-  <section id="install" class="card">
+  <section id="install" class="card install">
     <h2><span lang="en">Install</span><span lang="de">Installieren</span></h2>
-    <p><span lang="en">One line installs the app and the command line <code>qccheck</code> – no administrator rights. The package is downloaded from GitHub and only unpacked if its Ed25519 signature is valid.</span><span lang="de">Eine Zeile installiert die App und die Kommandozeile <code>qccheck</code> – ohne Administratorrechte. Das Paket kommt von GitHub und wird nur entpackt, wenn seine Ed25519-Signatur stimmt.</span></p>
+    <p><span lang="en">One line installs the app and the command line <code>qccheck</code> – no administrator rights. The package comes from GitHub and is only unpacked if its Ed25519 signature is valid.</span><span lang="de">Eine Zeile installiert die App und die Kommandozeile <code>qccheck</code> – ohne Administratorrechte. Das Paket kommt von GitHub und wird nur entpackt, wenn seine Ed25519-Signatur stimmt.</span></p>
 
-    <h3>Windows 10 / 11</h3>
-    <p class="hint"><span lang="en">Open PowerShell (Start menu › “PowerShell”), paste the line, press Enter.</span><span lang="de">PowerShell öffnen (Startmenü › „PowerShell“), Zeile einfügen, Enter.</span></p>
-    <div class="copyable"><code>irm https://marcvannuffel.github.io/qccheck-releases/install.ps1 | iex</code><button class="copy" type="button">Copy</button></div>
+    <div class="os-tabs" role="tablist" aria-label="Operating system">
+      <button type="button" role="tab" id="tab-win" data-os="win" aria-controls="pane-win" aria-selected="true">
+        <svg class="os-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M1 2.5l5.6-.8v5.6H1zM7.4 1.6L15 .5v6.8H7.4zM1 8.1h5.6v5.6L1 12.9zM7.4 8.1H15v6.8l-7.6-1.1z"/></svg>
+        <span>Windows 10 / 11</span>
+      </button>
+      <button type="button" role="tab" id="tab-mac" data-os="mac" aria-controls="pane-mac" aria-selected="false">
+        <svg class="os-icon" viewBox="0 0 16 16" aria-hidden="true"><path d="M11.2 8.5c0-1.6 1.3-2.4 1.4-2.4-.8-1.1-2-1.3-2.4-1.3-1-.1-2 .6-2.5.6s-1.3-.6-2.2-.6C4.4 4.8 3.2 5.5 2.6 6.6c-1.2 2.1-.3 5.3.9 7 .6.8 1.3 1.8 2.2 1.7.9 0 1.2-.6 2.3-.6s1.4.6 2.3.6c1 0 1.6-.9 2.1-1.7.7-1 1-1.9 1-2-.1 0-1.9-.7-2.2-3.1zM9.5 3.6c.5-.6.8-1.4.7-2.2-.7 0-1.6.5-2.1 1.1-.5.5-.9 1.4-.8 2.2.8.1 1.7-.4 2.2-1.1z"/></svg>
+        <span><span lang="en">macOS 11 or later</span><span lang="de">macOS 11 oder neuer</span></span>
+      </button>
+    </div>
 
-    <h3>macOS (Apple Silicon, Intel)</h3>
-    <p class="hint"><span lang="en">Open Terminal (Spotlight › “Terminal”), paste the line, press Enter.</span><span lang="de">Terminal öffnen (Spotlight › „Terminal“), Zeile einfügen, Enter.</span></p>
-    <div class="copyable"><code>curl -fsSL https://marcvannuffel.github.io/qccheck-releases/install.sh | bash</code><button class="copy" type="button">Copy</button></div>
+    <div class="os-pane" id="pane-win" role="tabpanel" aria-labelledby="tab-win" data-os="win">
+      <ol class="how">
+        <li><span lang="en">Open <b>PowerShell</b>: Start menu, type “PowerShell”, press Enter.</span><span lang="de"><b>PowerShell</b> öffnen: Startmenü, „PowerShell“ tippen, Enter.</span></li>
+        <li><span lang="en">Paste the line and press Enter. It takes about a minute.</span><span lang="de">Zeile einfügen und Enter drücken. Das dauert etwa eine Minute.</span></li>
+        <li><span lang="en">Start <b>QCCheck</b> from the desktop or the Start menu.</span><span lang="de"><b>QCCheck</b> über Desktop oder Startmenü starten.</span></li>
+      </ol>
+      <div class="term term-win">
+        <div class="term-bar"><span class="term-title">Windows PowerShell</span><span class="term-ctl" aria-hidden="true"><i></i><i></i><i></i></span></div>
+        <div class="term-body copyable"><span class="prompt" aria-hidden="true">PS C:\&gt;</span><code>irm https://marcvannuffel.github.io/qccheck-releases/install.ps1 | iex</code><button class="copy" type="button">Copy</button></div>
+      </div>
+    </div>
 
-    <ol class="steps">
-      <li><span lang="en">Start <b>QCCheck</b> from the desktop or Start menu (Mac: Applications in your home folder, Spotlight).</span><span lang="de"><b>QCCheck</b> über Desktop oder Startmenü starten (Mac: Programme im Benutzerordner, Spotlight).</span></li>
-      <li><span lang="en">Drop files or folders into the window, choose a template (or “Automatic”), press <b>Check</b>.</span><span lang="de">Dateien oder Ordner ins Fenster ziehen, Vorlage wählen (oder „Automatisch“), <b>Prüfen</b> drücken.</span></li>
-      <li><span lang="en">Updates: the app shows them at the top right and installs them itself (signature checked again).</span><span lang="de">Updates: die App zeigt sie oben rechts und installiert sie selbst (Signatur wieder geprüft).</span></li>
-    </ol>
+    <div class="os-pane" id="pane-mac" role="tabpanel" aria-labelledby="tab-mac" data-os="mac" hidden>
+      <ol class="how">
+        <li><span lang="en">Open <b>Terminal</b>: press ⌘ Space, type “Terminal”, press Return.</span><span lang="de"><b>Terminal</b> öffnen: ⌘ Leertaste, „Terminal“ tippen, Return.</span></li>
+        <li><span lang="en">Paste the line and press Return. It takes about a minute.</span><span lang="de">Zeile einfügen und Return drücken. Das dauert etwa eine Minute.</span></li>
+        <li><span lang="en">Start <b>QCCheck</b> from Applications in your home folder, or with Spotlight.</span><span lang="de"><b>QCCheck</b> aus „Programme“ im Benutzerordner starten oder über Spotlight.</span></li>
+      </ol>
+      <div class="term term-mac">
+        <div class="term-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="term-title">Terminal — zsh</span></div>
+        <div class="term-body copyable"><span class="prompt" aria-hidden="true">~ %</span><code>curl -fsSL https://marcvannuffel.github.io/qccheck-releases/install.sh | bash</code><button class="copy" type="button">Copy</button></div>
+      </div>
+      <p class="hint"><span lang="en">Apple Silicon and Intel – one package for both.</span><span lang="de">Apple Silicon und Intel – ein Paket für beide.</span></p>
+    </div>
+
+    <p class="after"><span lang="en">Updates arrive by themselves: the app shows them at the top right and installs them after checking the signature again.</span><span lang="de">Updates kommen von selbst: Die App zeigt sie oben rechts und installiert sie, nachdem sie die Signatur wieder geprüft hat.</span></p>
+
     <details>
       <summary><span lang="en">Beta channel and uninstalling</span><span lang="de">Beta-Kanal und Deinstallieren</span></summary>
       <p><span lang="en">Beta (pre-releases, may be unfinished):</span><span lang="de">Beta (Vorabversionen, können unfertig sein):</span></p>
-      <div class="copyable"><code>irm https://marcvannuffel.github.io/qccheck-releases/beta/install.ps1 | iex</code><button class="copy" type="button">Copy</button></div>
-      <div class="copyable"><code>curl -fsSL https://marcvannuffel.github.io/qccheck-releases/beta/install.sh | bash</code><button class="copy" type="button">Copy</button></div>
+      <div class="copyable small"><code>irm https://marcvannuffel.github.io/qccheck-releases/beta/install.ps1 | iex</code><button class="copy" type="button">Copy</button></div>
+      <div class="copyable small"><code>curl -fsSL https://marcvannuffel.github.io/qccheck-releases/beta/install.sh | bash</code><button class="copy" type="button">Copy</button></div>
       <p><span lang="en">The normal line switches back to the stable channel. To uninstall, delete the QCCheck shortcuts and the folder <code>%LOCALAPPDATA%\QCCheck</code> (Mac: <code>~/Library/Application Support/QCCheck</code> and <code>~/Applications/QCCheck.app</code>).</span><span lang="de">Die normale Zeile stellt zurück auf stabil. Entfernen: Verknüpfungen QCCheck löschen und den Ordner <code>%LOCALAPPDATA%\QCCheck</code> (Mac: <code>~/Library/Application Support/QCCheck</code> und <code>~/Applications/QCCheck.app</code>).</span></p>
     </details>
   </section>
@@ -100,6 +125,6 @@
 </footer>
 </div>
 
-<script src="site.js?v=1"></script>
+<script src="site.js?v=2"></script>
 </body>
 </html>

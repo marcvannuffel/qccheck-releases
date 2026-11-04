@@ -36,6 +36,22 @@
     else { $("gate-err").hidden = false; $("gate-code").select(); }
   });
 
+
+  // Plattform: auf dem Mac der Mac-Reiter, sonst Windows; eine Wahl von Hand bleibt
+  const tabs = [...document.querySelectorAll(".os-tabs [data-os]")];
+  function showOs(os) {
+    for (const t of tabs) t.setAttribute("aria-selected", String(t.dataset.os === os));
+    for (const p of document.querySelectorAll(".os-pane")) p.hidden = p.dataset.os !== os;
+  }
+  const guess = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent) ? "mac" : "win";
+  showOs(store.get("qcOs") || guess);
+  for (const t of tabs) t.addEventListener("click", () => { showOs(t.dataset.os); store.set("qcOs", t.dataset.os); });
+  // Pfeiltasten zwischen den Reitern
+  document.querySelector(".os-tabs")?.addEventListener("keydown", (e) => {
+    if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+    const i = tabs.findIndex((t) => t.getAttribute("aria-selected") === "true"), next = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+    next.click(); next.focus();
+  });
   // Installationszeilen kopieren (Knopf oder Klick auf die Zeile); wo die Zwischenablage verweigert wird: markieren
   async function copy(code, button) {
     try { await navigator.clipboard.writeText(code.textContent.trim()); button.textContent = de() ? "Kopiert" : "Copied"; }
